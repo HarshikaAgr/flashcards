@@ -6,8 +6,8 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f1f5f9;
-  color: #1e293b;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f1f5f9;
   min-height: 100vh;
 }
 
@@ -15,61 +15,110 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 40px 20px 60px;
   min-height: 100vh;
 }
 
+/* ── HEADER ── */
 .app-header {
   text-align: center;
   margin-bottom: 40px;
+  max-width: 620px;
 }
 
-.app-header h1 {
-  font-size: 2.2rem;
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.emoji {
+  font-size: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
   font-weight: 800;
-  color: #1e293b;
-  margin-bottom: 10px;
+  background: linear-gradient(90deg, #818cf8, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .description {
   font-size: 1rem;
-  color: #64748b;
-  margin-bottom: 8px;
-  max-width: 500px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
-.card-count {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #4f46e5;
-  background: #eef2ff;
-  display: inline-block;
-  padding: 4px 14px;
+/* ── STATS ROW ── */
+.stats-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 16px;
   border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #cbd5e1;
 }
 
+/* Difficulty pill colors (stretch feature) */
+.difficulty-easy  { background: rgba(34, 197, 94, 0.15);  border-color: #22c55e; color: #4ade80; }
+.difficulty-medium { background: rgba(234, 179, 8, 0.15);  border-color: #eab308; color: #facc15; }
+.difficulty-hard  { background: rgba(239, 68, 68, 0.15);  border-color: #ef4444; color: #f87171; }
+
+/* ── CARD AREA ── */
 .card-area {
   margin-bottom: 36px;
 }
 
+/* ── NEXT BUTTON ── */
+.controls {
+  margin-bottom: 28px;
+}
+
 .next-btn {
-  background: #4f46e5;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
   border: none;
-  padding: 14px 36px;
+  padding: 14px 44px;
   font-size: 1rem;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: opacity 0.2s, transform 0.1s;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
 }
 
-.next-btn:hover {
-  background: #4338ca;
-  transform: translateY(-1px);
+.next-btn:hover  { opacity: 0.88; transform: translateY(-2px); }
+.next-btn:active { transform: translateY(0); }
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #64748b;
 }
 
-.next-btn:active {
-  transform: translateY(0);
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
+.legend-dot.easy   { background: #22c55e; }
+.legend-dot.medium { background: #eab308; }
+.legend-dot.hard   { background: #ef4444; }

@@ -1,27 +1,29 @@
-/* Flip Card Container */
+/* ── FLIP CARD CONTAINER ── */
 .flip-card {
-  background-color: transparent;
-  width: 500px;
-  height: 280px;
-  perspective: 1000px;
+  width: 560px;
+  height: 300px;
+  perspective: 1200px;
   cursor: pointer;
 }
 
-/* The inner wrapper that flips */
+@media (max-width: 600px) {
+  .flip-card { width: 340px; height: 260px; }
+}
+
+/* ── INNER — this is what rotates ── */
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
 }
 
-/* Trigger the flip */
 .flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
 
-/* Front and Back share these base styles */
+/* ── SHARED FACE STYLES ── */
 .flip-card-front,
 .flip-card-back {
   position: absolute;
@@ -29,49 +31,59 @@
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: 16px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: 36px 40px;
   box-sizing: border-box;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-/* Front */
-.flip-card-front {
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  color: white;
+/* ── FRONT DIFFICULTY COLORS (stretch feature) ── */
+.difficulty-bg-easy {
+  background: linear-gradient(135deg, #064e3b, #065f46);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+.difficulty-bg-medium {
+  background: linear-gradient(135deg, #78350f, #92400e);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+.difficulty-bg-hard {
+  background: linear-gradient(135deg, #7f1d1d, #991b1b);
+  border: 1px solid rgba(252, 165, 165, 0.3);
 }
 
-/* Back */
+/* ── BACK ── */
 .flip-card-back {
-  background: linear-gradient(135deg, #059669, #0d9488);
-  color: white;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  border: 1px solid rgba(129, 140, 248, 0.3);
   transform: rotateY(180deg);
 }
 
 .card-label {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  opacity: 0.75;
-  margin: 0 0 12px 0;
+  letter-spacing: 2.5px;
+  opacity: 0.6;
+  margin: 0 0 14px;
+  color: #fff;
 }
 
 .card-text {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin: 0 0 16px 0;
-  line-height: 1.5;
+  color: #f1f5f9;
+  line-height: 1.6;
+  margin: 0 0 20px;
 }
 
 .card-hint {
-  font-size: 0.75rem;
-  opacity: 0.6;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
   margin: 0;
   font-style: italic;
 }
