@@ -1,67 +1,143 @@
-# Web Development Project - CS Fundamentals Flashcards
+# CS Fundamentals Flashcards
 
-Submitted by: **Harshika Agrawal**
-
-This web app: **An interactive CS flashcard app with answer guessing, fuzzy matching, sequential navigation with prev/next, shuffle, streak counters, and a mastered-cards system. Built with React and Vite.**
-
-## Required Features
-
-The following **required** functionality is completed:
-
-- [x] **The user can enter their guess into an input box *before* seeing the flipside of the card**
-  - Application features a clearly labeled input box with a submit button where users can type in a guess
-  - Clicking on the submit button with an **incorrect** answer shows visual feedback (red border + error message + red card glow)
-  - Clicking on the submit button with a **correct** answer shows visual feedback (green border + success message + green card glow)
-- [x] **The user can navigate through an ordered list of cards**
-  - A forward/next button navigates to the next card in sequential order when clicked
-  - A previous/back button returns to the previous card in sequential order when clicked
-  - Both buttons are visually disabled (opacity reduced, cursor changes) at the beginning and end of the list — no wrap-around navigation
-
-The following **optional** features are implemented:
-
-- [x] Users can use a shuffle button to randomize the order of the cards
-  - Cards remain in sequential order unless the shuffle button is clicked
-  - Cards change to a random sequence once the shuffle button is clicked, then stay in that new order
-- [x] A user's answer may be counted as correct even when it is slightly different from the target answer
-  - Answers are case-insensitive (uppercase/lowercase ignored)
-  - Punctuation is stripped before comparison
-  - Partial matches are accepted — the guess just needs to appear within the answer (or vice versa)
-- [x] A counter displays the user's current and longest streak of correct responses
-  - The current counter increments when a user guesses correctly
-  - The current counter resets to 0 when a user guesses incorrectly
-  - A separate "Best streak" counter updates whenever the current streak exceeds it
-- [x] A user can mark a card that they have mastered and have it removed from the pool of displayed cards
-  - The user can click "✓ Mastered" to mark the current card
-  - Mastered cards are removed from the active deck and shown in a "Mastered" list at the bottom of the page
-  - If all cards are mastered, an empty state is shown with a "Reset deck" button
-
-The following **additional** features are implemented:
-
-* [x] Answer input supports pressing **Enter** to submit (not just the button)
-* [x] Submit button is disabled when input is empty or answer has already been submitted
-* [x] Card auto-resets to the front face and clears the input when navigating to a new card
-* [x] Card can only be manually flipped after a guess is submitted (enforces the guessing flow)
-* [x] Sticky header with live "cards remaining / total" count, current streak, and best streak
-* [x] Keyboard accessible — Enter flips cards, visible focus rings throughout
-* [x] Fully responsive layout down to 375px mobile screens
-
-## Video Walkthrough
-
-Here's a walkthrough of implemented user stories:
+A full-featured, interactive flashcard web app for studying Computer Science fundamentals, built with React and Vite. Features answer guessing with fuzzy matching, sequential navigation, shuffle, streak tracking, and a mastered-cards system.
 
 <img src='src/assets/demo.gif' title='Video Walkthrough' width='700' alt='Video Walkthrough' />
 
-<!-- Replace the src URL above with your actual GIF link after recording 
-GIF created with [ScreenToGif](https://www.screentogif.com/) -->
+---
 
-## Notes
+## Table of Contents
 
-Challenges encountered while building the app:
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [What I Learned](#what-i-learned)
+- [License](#license)
 
-- **Guess-then-flip flow:** The card needed to be unflippable until a guess was submitted, but still flippable again after. Solved by only calling `setFlipped` inside `onFlip` when `guessResult !== null`, and automatically flipping after submission.
-- **Mastered card position clamping:** When a mastered card is removed, the `position` index could go out of bounds. Solved by computing `safePosition = Math.min(position, activeCards.length - 1)` reactively using `useMemo`.
-- **Fuzzy matching:** A simple `.includes()` check after normalizing both strings (lowercase + strip punctuation) covers most partial-match cases without false positives.
-- **Shuffle + mastered interaction:** Shuffle only operates on the currently active (non-mastered) card IDs, so mastered cards never re-appear.
+---
+
+## Overview
+
+This project started as a course assignment and grew into a portfolio piece I'm happy about. The goal was to build something genuinely useful for studying, not just a card flipper, but a full study tool that enforces a guess-first workflow, gives immediate feedback, tracks your performance over time, and lets you retire cards you've fully mastered.
+
+The design is intentionally minimal and developer-focused: dark theme, monospace accents, and color-coded difficulty levels that feel at home in a CS context.
+
+---
+
+## Features
+
+### Core
+- **10 CS flashcard pairs** covering HTML, CSS, React, JavaScript, and algorithms
+- **3D flip animation** — cards flip smoothly on click using CSS `perspective` and `rotateY`
+- **Color-coded difficulty** — Easy (green), Medium (amber), Hard (red) with distinct card styling per level
+
+### Guessing & Feedback
+- **Guess input** — type an answer before seeing the card's back face
+- **Fuzzy matching** — answers accepted even with different casing, punctuation, or partial matches
+- **Instant visual feedback** — correct guesses glow green, wrong guesses glow red, with a status message
+- **Enforced flow** — card can only be flipped after submitting a guess
+
+### Navigation
+- **Sequential Prev / Next** — move through cards in order, not randomly
+- **Disabled at boundaries** — Back is disabled on card 1, Next is disabled on the last card; no wrap-around
+- **Shuffle** — randomizes the card order with one click; stays in that order until shuffled again
+
+### Progress Tracking
+- **Streak counter** — increments on correct answers, resets to 0 on wrong
+- **Best streak** — tracks your all-time best streak for the session
+- **Cards remaining** — header shows how many cards are left in the active pool
+
+### Mastered Cards
+- **Mark as mastered** — removes a card from the active deck permanently for the session
+- **Mastered list** — mastered cards appear in a section at the bottom for reference
+- **Empty state** — when all cards are mastered, a congratulations screen appears with a Reset button
+
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| React 18 | UI components and state management |
+| Vite | Build tool and dev server |
+| CSS3 | 3D flip animation, custom design tokens, responsive layout |
+| JavaScript (ES6+) | Logic, fuzzy matching, Fisher-Yates shuffle |
+
+No external UI libraries, all components and styles are written from scratch.
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js v18 or higher
+- npm v9 or higher
+
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/HarshikaAgr/flashcards.git
+
+# 2. Move into the project folder
+cd flashcards
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
+npm run dev
+```
+
+The app will be running at `http://localhost:5173`
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+Output goes to the `dist/` folder, ready to deploy to GitHub Pages, Vercel, or Netlify.
+
+---
+
+## Project Structure
+
+```
+flashcards/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Flashcard.jsx       # Card with 3D flip animation
+│   │   ├── Flashcard.css
+│   │   ├── GuessInput.jsx      # Answer input with submit + feedback
+│   │   ├── GuessInput.css
+│   │   ├── StreakBar.jsx        # Current and best streak display
+│   │   └── StreakBar.css
+│   ├── App.jsx                 # Root component, all state lives here
+│   └── App.css                 # Global tokens, layout, and shared styles
+├── assets/
+│   └── demo.gif
+├── index.html
+├── vite.config.js
+└── README.md
+```
+
+**State management approach:** all state lives in `App.jsx` and is passed down as props. No external state library is needed at this scale, this is intentional to keep the architecture easy to follow.
+
+---
+
+## What I Learned
+
+- **useState with multiple interdependent pieces of state**: managing `cardOrder`, `position`, `guess`, `guessResult`, `flipped`, `streak`, and `masteredIds` together and keeping them consistent across user actions
+- **CSS 3D transforms**: getting `backface-visibility`, `preserve-3d`, and `perspective` to work reliably across browsers
+- **Controlled components**: wiring the guess `<input>` to React state with `onChange` and handling the submit flow correctly
+- **useMemo for derived state**: computing `activeCards` (cards minus mastered ones) reactively without duplicating state
+- **Edge case thinking**: preventing the same card from repeating on shuffle, clamping the position index when a card is removed, disabling navigation at list boundaries
+
+---
 
 ## License
 
