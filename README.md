@@ -1,8 +1,10 @@
-# Web Development Project - CS Fundamentals Flashcards
+# Web Development Project 2 - CS Fundamentals Flashcards
 
 Submitted by: **Harshika Agrawal**
 
-This web app: **An interactive flashcard app to study Computer Science fundamentals. Cards are color-coded by difficulty (Easy / Medium / Hard), flip with a smooth 3D animation when clicked, and a new random card is shown each time you press "Next Card". A streak counter tracks how many cards you've studied in one session.**
+This web app: **An interactive flashcard app for studying Computer Science fundamentals. Cards are color-coded by difficulty (Easy / Medium / Hard), flip with a smooth 3D animation on click, and the Next Card button picks a new card at random. A session counter tracks how many cards you've studied.**
+
+Time spent: **3** hours spent in total
 
 ## Required Features
 
@@ -13,7 +15,7 @@ The following **required** functionality is completed:
   - [x] A short description of the card set is displayed
   - [x] A list of card pairs is created
   - [x] The total number of cards in the set is displayed
-  - [x] Card set is represented as a list of card pairs (an array of objects where each object contains the question, answer, and difficulty)
+  - [x] Card set is represented as a list of card pairs (array of objects with `question`, `answer`, and `difficulty`)
 - [x] **A single card at a time is displayed**
   - [x] Only one half of the information pair is displayed at a time
 - [x] **Clicking on the card flips the card over, showing the corresponding component of the information pair**
@@ -24,17 +26,17 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [x] Cards have different visual styles such as color based on their category
-  - [x] Difficulty categories: Easy (green), Medium (yellow/amber), Hard (red)
-  - [x] Each difficulty level has a distinct gradient background on the card front
+  - [x] Difficulty categories: Easy (green), Medium (amber), Hard (red) — each with distinct badge + glow styling
 
 The following **additional** features are implemented:
 
-* [x] Streak counter that tracks how many cards the user has studied in the current session
-* [x] Difficulty badge dynamically updates in the header to show the current card's difficulty
-* [x] Smooth 3D CSS flip animation using `perspective` and `rotateY` — card auto-resets to front when "Next" is clicked
-* [x] Dark theme with gradient UI, responsive layout for mobile screens
-* [x] Difficulty legend at the bottom of the page for reference
-* [x] `aria-label` on the card for basic accessibility
+* [x] Session counter in the header tracks how many cards have been studied
+* [x] Card auto-resets to front face when Next is clicked (via React `key` prop)
+* [x] Keyboard accessible — Enter key flips the card; focus ring shown on keyboard navigation
+* [x] Sticky header with backdrop blur for a polished, app-like feel
+* [x] Subtle grid texture and ambient glow on each card face for visual depth
+* [x] Fully responsive layout down to 375px mobile screens
+* [x] Monospace font (`JetBrains Mono`) used for labels and wordmark for a CS-appropriate aesthetic
 
 ## Video Walkthrough
 
@@ -42,16 +44,21 @@ Here's a walkthrough of implemented required features:
 
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with [Kap](https://getkap.co/) (macOS) / [ScreenToGif](https://www.screentogif.com/) (Windows)
+<!-- Replace the src URL above with your actual GIF link after recording -->
+<!-- Recommended tools:
+[Kap](https://getkap.co/) for macOS
+[ScreenToGif](https://www.screentogif.com/) for Windows
+[peek](https://github.com/phw/peek) for Linux -->
+
+GIF created with [ScreenToGif](https://www.screentogif.com/)
 
 ## Notes
 
 Challenges encountered while building the app:
 
-- Getting the CSS 3D flip to work correctly required making sure `backface-visibility: hidden` and `transform-style: preserve-3d` were set on the right elements.
-- The card needed to automatically reset to the front face when "Next" is clicked — solved by passing `key={currentIndex}` to the `Flashcard` component, which remounts it fresh on each new card.
-- Ensuring the random next-card logic never repeats the same card required a `do...while` loop.
+- **3D flip reset on Next:** When clicking Next, the card needs to reset to the front face. Solved cleanly by passing `key={card.id}` to the Flashcard component — React unmounts and remounts it fresh on each new card, so `isFlipped` always starts as `false`.
+- **CSS backface-visibility:** Getting `backface-visibility: hidden` to work consistently across browsers required also setting `-webkit-backface-visibility: hidden` and ensuring `transform-style: preserve-3d` was on the inner wrapper, not the outer container.
+- **Random card logic:** A basic `Math.random()` call can return the same index twice in a row. Fixed with a `do...while` loop that keeps picking until a different card is selected.
 
 ## License
 

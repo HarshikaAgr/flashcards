@@ -1,33 +1,36 @@
 import { useState } from "react";
 import "./Flashcard.css";
 
-function Flashcard({ card }) {
-  const [isFlipped, setIsFlipped] = useState(false);
+export default function Flashcard({ card }) {
+  const [flipped, setFlipped] = useState(false);
 
   return (
     <div
-      className={`flip-card ${isFlipped ? "flipped" : ""}`}
-      onClick={() => setIsFlipped(!isFlipped)}
+      className={`fc-wrap ${flipped ? "is-flipped" : ""}`}
+      onClick={() => setFlipped(f => !f)}
       role="button"
-      aria-label={isFlipped ? "Click to flip back" : "Click to see answer"}
+      tabIndex={0}
+      aria-pressed={flipped}
+      aria-label={flipped ? "Answer shown. Click to see question." : "Question shown. Click to reveal answer."}
+      onKeyDown={e => e.key === "Enter" && setFlipped(f => !f)}
     >
-      <div className="flip-card-inner">
+      <div className="fc-inner">
+
         {/* FRONT */}
-        <div className={`flip-card-front difficulty-bg-${card.difficulty}`}>
-          <p className="card-label">Question</p>
-          <p className="card-text">{card.question}</p>
-          <p className="card-hint">👆 Click to reveal answer</p>
+        <div className="fc-face fc-front">
+          <span className="fc-face-label">Question</span>
+          <p className="fc-text">{card.question}</p>
+          <span className="fc-hint">Click to reveal →</span>
         </div>
 
         {/* BACK */}
-        <div className="flip-card-back">
-          <p className="card-label">Answer</p>
-          <p className="card-text">{card.answer}</p>
-          <p className="card-hint">👆 Click to flip back</p>
+        <div className="fc-face fc-back">
+          <span className="fc-face-label">Answer</span>
+          <p className="fc-text">{card.answer}</p>
+          <span className="fc-hint">← Click to go back</span>
         </div>
+
       </div>
     </div>
   );
 }
-
-export default Flashcard;
