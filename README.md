@@ -42,7 +42,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='c:\Users\harsh\AppData\Local\Packages\Microsoft.ScreenSketch_8wekyb3d8bbwe\TempState\Gif\20260617-0013-51.0646344.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='![alt text](20260617-0013-51.0646344.gif)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace the src URL above with your actual GIF link after recording -->
 <!-- Recommended tools:
