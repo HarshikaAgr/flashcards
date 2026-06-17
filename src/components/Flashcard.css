@@ -1,16 +1,16 @@
-/* ─────────────────────────────────────────
-   FLIP CARD
-───────────────────────────────────────── */
 .fc-wrap {
   width: min(580px, 100%);
-  height: 300px;
+  height: 280px;
   perspective: 1400px;
-  cursor: pointer;
+  cursor: default;
   outline: none;
   user-select: none;
+  transition: filter 0.25s;
 }
 
-/* keyboard focus ring */
+.fc-wrap.fc-correct  { filter: drop-shadow(0 0 18px rgba(63,185,80,0.45)); }
+.fc-wrap.fc-incorrect { filter: drop-shadow(0 0 18px rgba(248,81,73,0.45)); }
+
 .fc-wrap:focus-visible .fc-inner {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
@@ -26,11 +26,8 @@
   border-radius: 18px;
 }
 
-.fc-wrap.is-flipped .fc-inner {
-  transform: rotateY(180deg);
-}
+.fc-wrap.is-flipped .fc-inner { transform: rotateY(180deg); }
 
-/* ─── SHARED FACE STYLES ─── */
 .fc-face {
   position: absolute;
   inset: 0;
@@ -42,11 +39,11 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 32px 36px;
+  padding: 28px 32px;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
-/* subtle grid texture */
 .fc-face::before {
   content: "";
   position: absolute;
@@ -59,45 +56,42 @@
   pointer-events: none;
 }
 
-/* ─── FRONT ─── */
+/* FRONT */
 .fc-front {
   background: var(--surface);
 }
-
 .fc-front::after {
   content: "";
   position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 200px;
-  height: 200px;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
   border-radius: 50%;
   background: var(--accent-glow);
   filter: blur(40px);
   pointer-events: none;
 }
 
-/* ─── BACK ─── */
+/* Correct/incorrect border on front */
+.fc-correct  .fc-front { border-color: rgba(63,185,80,0.5);  background: rgba(63,185,80,0.06); }
+.fc-incorrect .fc-front { border-color: rgba(248,81,73,0.5); background: rgba(248,81,73,0.06); }
+
+/* BACK */
 .fc-back {
   background: #0e1f35;
   border-color: rgba(88,166,255,0.2);
   transform: rotateY(180deg);
 }
-
 .fc-back::after {
   content: "";
   position: absolute;
-  bottom: -60px;
-  left: -60px;
-  width: 200px;
-  height: 200px;
+  bottom: -60px; left: -60px;
+  width: 200px; height: 200px;
   border-radius: 50%;
   background: rgba(88,166,255,0.08);
   filter: blur(50px);
   pointer-events: none;
 }
 
-/* ─── TEXT ─── */
 .fc-face-label {
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -111,11 +105,11 @@
   flex: 1;
   display: flex;
   align-items: center;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
   font-weight: 500;
   line-height: 1.55;
   color: var(--text-primary);
-  padding: 12px 0;
+  padding: 10px 0;
 }
 
 .fc-hint {
@@ -124,11 +118,8 @@
   align-self: flex-end;
 }
 
-/* ─────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────── */
 @media (max-width: 600px) {
-  .fc-wrap  { height: 260px; }
-  .fc-face  { padding: 24px 24px; }
-  .fc-text  { font-size: 0.95rem; }
+  .fc-wrap  { height: 240px; }
+  .fc-face  { padding: 20px 20px; }
+  .fc-text  { font-size: 0.92rem; }
 }
