@@ -42,15 +42,15 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='![alt text](20260617-0013-51.0646344.gif)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='![Demo](assets/demo.gif)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace the src URL above with your actual GIF link after recording -->
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux -->
+[peek](https://github.com/phw/peek) for Linux 
 
-GIF created with [ScreenToGif](https://www.screentogif.com/)
+GIF created with [ScreenToGif](https://www.screentogif.com/) -->
 
 ## Notes
 
