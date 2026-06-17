@@ -42,7 +42,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='![Demo](assets/demo.gif)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='![Demo](https://github.com/HarshikaAgr/flashcards/blob/main/src/assets/demo.gif)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace the src URL above with your actual GIF link after recording -->
 <!-- Recommended tools:
